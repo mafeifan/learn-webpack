@@ -23,7 +23,7 @@ module.exports = {
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'webpack demo'
+      title: 'Getting Started'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({
@@ -35,8 +35,5 @@ module.exports = {
       watch: true,
       exclude: ['vendor.*.js']
     }),
-    new webpack.HotModuleReplacementPlugin({
-      // Options...
-    })
   ]
 };
