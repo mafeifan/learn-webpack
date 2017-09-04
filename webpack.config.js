@@ -11,7 +11,7 @@ module.exports = {
   output: {
     // entry是入口，不能再定义成filename: 'bundle.js'了，要使用如下的替换符号
     // 输出文件名,类似vendor.bfd97.js 每次修改文件后的hash会变
-    filename: '[name].[chunkHash:5].js',
+    filename: '[name].[hash:5].js',
     // // 输出目录。
     path: path.resolve(__dirname, 'dist'),
     // https://webpack.js.org/configuration/output/#output-publicpath
@@ -35,5 +35,8 @@ module.exports = {
       watch: true,
       exclude: ['vendor.*.js']
     }),
+    new webpack.HotModuleReplacementPlugin({
+      // Options...
+    })
   ]
 };
