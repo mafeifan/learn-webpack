@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './app/index.js',
+    main: './src/index.js',
     vendor: ['jquery'],
   }, // 入口文件
   output: {
