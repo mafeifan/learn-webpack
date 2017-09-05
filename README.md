@@ -2,8 +2,9 @@
 
 本节安装了webpack-dev-server。
 webpack-dev-server 提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。
-有个hot配置项，默认为true
 也就是说修改文件可以自动刷新页面，极大提高开发效率。
+注意不是热替换HMR，会看到页面闪动，关于HMR见5.development分支
+
 
 具体步骤：
 在webpack配置文件中添加devServer配置项，
