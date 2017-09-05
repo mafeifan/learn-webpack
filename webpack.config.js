@@ -6,8 +6,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   entry: {
     main: './src/index.js',
-    // 这个不是必须的，目的将print文件独立出来,下面用到了HtmlWebpackPlugin，会自动全部注入到html
-    print: './src/print.js',
     vendor: ['jquery'],
   },
   output: {
@@ -27,9 +25,19 @@ module.exports = {
   // 告诉开发服务器(dev server)，在哪里查找文件
   // https://doc.webpack-china.org/configuration/dev-server
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    hot: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     // 能自动生成html入口文件, 输出目录是output中定义的
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
