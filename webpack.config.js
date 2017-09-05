@@ -18,16 +18,6 @@ module.exports = {
     // 访问地址 <script src="dist/xxx.js"></script>
     // publicPath : 'dist/',
   },
-  // 更容易地追踪错误和警告,将编译后的代码映射回原始源代码
-  // 查看更多选项：https://doc.webpack-china.org/configuration/devtool
-  devtool: 'inline-source-map',
-  // webpack-dev-server 提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)
-  // 告诉开发服务器(dev server)，在哪里查找文件
-  // https://doc.webpack-china.org/configuration/dev-server
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
   module: {
     rules: [
       {
@@ -37,12 +27,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     // 能自动生成html入口文件, 输出目录是output中定义的
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'Output Management'
+      title: 'Production'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({
