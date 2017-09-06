@@ -4,7 +4,9 @@ import _ from 'lodash';
 import printMe from './print';
 import './css/style.css'
 
-// const $ = require('jquery');
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
 
 function component() {
   const element = document.createElement('div');
