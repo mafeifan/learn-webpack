@@ -1,36 +1,21 @@
 // 关于es6的import和export，即便没有安装babel，webpack能够提供开箱即用的支持。
 
-import _ from 'lodash';
-import printMe from './print';
-import './css/style.css'
+// 我们要动态引入
+// import _ from 'lodash;
 
-if (process.env.NODE_ENV !== 'production') {
-  console.log('Looks like we are in development mode!');
-}
-
-function component() {
-  const element = document.createElement('div');
-  const btn = document.createElement('button');
-
-  /* lodash is required for the next line to work */
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
-  element.appendChild(btn);
-
-  return element;
-}
-
-
-var element = component();
-document.body.appendChild(element);
-
-if (module.hot) {
-  module.hot.accept('./print.js', function () {
-    console.log('Accepting the updated printMe module!');
-    document.body.removeChild(element);
-    element = component(); // Re-render the "component" to update the click handler
-    document.body.appendChild(element);
+function getComponent() {
+  // 这个注释是必要的，根据配置生成的chunk name是lodash.chunk.js，移除注释会变成[id].chunk.js
+  // 而且生成的chunk会在header标签中被引入
+  return import(/* webpackChunkName: "lodash" */ 'lodash')
+  .then(_ => {
+    const element = document.createElement('div');
+    element.innerHTML = _.join(['Hello', 'webpack!'], ' ');
+    return element;
   })
-}
+  .catch(error => 'An error occurred while loading the component');
+}  
+ 
+
+getComponent().then(element => {
+  document.body.appendChild(element);
+})

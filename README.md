@@ -1,12 +1,12 @@
 # webpack-study
 
-本节安装了uglifyjs-webpack-plugin。
-好像不支持es6，实测写let要会报错，要写var。所以要引入babel先转义。
-貌似(webpack-closure-compiler)[https://github.com/roman01la/webpack-closure-compiler]更好用些。
+代码分离是webpack很重要的功能。
+关于动态导入建议用import写法。不建议用require.ensure已被废弃
 
-还安装了webpack-merge。合并配置文件工具
+How:
+1. 先在配置文件的output添加chunkFilename
+2. 使用import(/* webpackChunkName: "lodash" */ 'your_module_name')
+3. 这样就会生成一个名为lodash的chunk。因为安装了html-webpack-plugin所以会自动插入，
+不过是在header标签中而非body。
 
-新增webpack.dev.js和webpack.prod.js
-使用npm run dev和npm run build
-
-参考：https://doc.webpack-china.org/guides/production
+参考：https://doc.webpack-china.org/guides/code-splitting

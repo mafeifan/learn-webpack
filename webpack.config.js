@@ -17,6 +17,9 @@ module.exports = {
     // https://webpack.js.org/configuration/output/#output-publicpath
     // 访问地址 <script src="dist/xxx.js"></script>
     // publicPath : 'dist/',
+    // 决定非入口 chunk 的名称。
+    // import(/* webpackChunkName: "lodash" */ 'lodash').then... 会生成lodash.chunk.js
+    chunkFilename: '[name].chunk.js',
   },
   module: {
     rules: [
@@ -31,7 +34,7 @@ module.exports = {
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'Production'
+      title: 'Code Splitting'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({
