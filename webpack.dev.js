@@ -5,10 +5,10 @@ const webpack = require('webpack');
 module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
-    hot: true,
+    // hot: true,
     contentBase: './dist'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
   ]
 });
