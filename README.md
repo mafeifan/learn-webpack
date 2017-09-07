@@ -1,7 +1,7 @@
 # webpack-study
 
 代码分离是webpack很重要的功能。
-关于动态导入建议用import写法。不建议用require.ensure已被废弃
+关于动态导入建议用import写法。不建议用require.ensure
 
 How:
 1. 先在配置文件的output添加chunkFilename
