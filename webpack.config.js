@@ -6,7 +6,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   entry: {
     main: './src/index.js',
-    vendor: ['jquery'],
+    //vendor: ['jquery'],
+  },
+  externals: {
+    jquery: 'jQuery',
+    root: '$'
   },
   output: {
     // 输出文件名,类似vendor.bfd97.js 每次修改文件后的hash会变
@@ -42,7 +46,8 @@ module.exports = {
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'hot-module-replacement'
+      title: 'xxhot-module-replacement',
+      template: './src/template.html'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({

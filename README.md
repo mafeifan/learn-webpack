@@ -1,22 +1,27 @@
 # webpack-study
 
-HMR热模块替换
+使用external从外部加载模块
 
-开启步骤
-1.安装webpack-dev-server
-2. 配置文件中，hot: true
+有时候我们不想让webpack打包某些模块，比如jquery。
+可以添加externals配置项
+
+1. 首先改动html，添加<script src="https://code.jquery.com/jquery-3.1.0.js"
+  integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
+  crossorigin="anonymous"></script>
+
+  不受HtmlWebpackPlugin的template影响
+
+2. 配置external
+
 ```
-devServer: {
-  contentBase: './dist',
-  hot: true
-},
+externals: {
+  jquery: 'jQuery'
+}
 ```
-3.添加热替换插件，new webpack.HotModuleReplacementPlugin()
 
-修改样式会发现发生了变化，而页面没有刷新
+3. 在js中
 
-
-待研究：
-webpack-dev-middleware
-
-参考：https://webpack.js.org/guides/development/
+```
+import $ from 'jquery';
+$('.my-element').animate(...);
+```

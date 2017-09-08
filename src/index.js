@@ -4,7 +4,8 @@ import _ from 'lodash';
 import printMe from './print';
 import './css/style.css'
 
-// const $ = require('jquery');
+// 因为在external定义jquery，即便这么写也不会被webpack打包进去
+const $ = require('jquery');
 
 function component() {
   const element = document.createElement('div');
@@ -16,7 +17,8 @@ function component() {
   btn.innerHTML = 'Click me and check the console!';
   btn.onclick = printMe;
   element.appendChild(btn);
-
+  // jquery是我们用external配置从外部加载来的，并没有经过webpack打包
+  console.log($('body').width())
   return element;
 }
 
