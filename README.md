@@ -1,12 +1,18 @@
 # webpack-study
 
-代码分离是webpack很重要的功能。
-关于动态导入建议用import写法。不建议用require.ensure
+懒加载
 
-How:
-1. 先在配置文件的output添加chunkFilename
-2. 使用import(/* webpackChunkName: "lodash" */ 'your_module_name')
-3. 这样就会生成一个名为lodash的chunk。因为安装了html-webpack-plugin所以会自动插入，
-不过是在header标签中而非body。
+要点：
+1. 注释不能丢 /* webpackChunkName: "print" */
+2. import返回的是换个promise
 
-参考：https://doc.webpack-china.org/guides/code-splitting
+```
+  btn.onclick = e => import(/* webpackChunkName: "print" */ './print')
+    .then(module => {
+      console.log(module);
+      // 注意当调用 ES6 模块的 import() 方法（引入模块）时，必须指向模块的 .default 值，
+      // 因为它才是 promise 被处理后返回的实际的 module 对象。
+      var print = module.default;
+      print();
+    });
+```

@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   entry: {
     main: './src/index.js',
-    vendor: ['jquery'],
+    vendor: ['lodash'],
   },
   output: {
     // 输出文件名,类似vendor.bfd97.js 每次修改文件后的hash会变
@@ -34,7 +34,7 @@ module.exports = {
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'Code Splitting'
+      title: 'Lazy loading'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({
