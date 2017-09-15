@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 
 module.exports = {
   entry: {
@@ -20,27 +18,12 @@ module.exports = {
     // 访问地址 <script src="dist/xxx.js"></script>
     // publicPath : 'dist/',
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        // 结合CommonsChunkPlugin，能实现在index.html中自动加上<link>标签
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader'
-        })
-        // 如果用下面的写法，ExtractTextPlugin是没效果的而且还会将css放到html中
-        /*
-        use: ['style-loader', 'css-loader']
-        */
-      }
-    ]
-  },
   plugins: [
     // 能自动生成html入口文件, 输出目录是output中定义的
     // 并添加打包的css和js到html中
     new HtmlWebpackPlugin({
       // 自定义html的title标签
-      title: 'Asset Management'
+      title: 'Getting Started'
     }),
     // 提取公共的模块到vendor，供缓存
     new webpack.optimize.CommonsChunkPlugin({
@@ -52,9 +35,5 @@ module.exports = {
       watch: true,
       exclude: ['vendor.*.js']
     }),
-    // 它会将所有的入口chunk(entry chunks)中import(require)的*.css,移动到独立分离的 CSS 文件。
-    // 使用场景：css有点大，利用浏览器并行加载js和css，提高效率。
-    // 可以结合loader，创建多个实例。 see: https://doc.webpack-china.org/plugins/extract-text-webpack-plugin
-    new ExtractTextPlugin('vendor.css'),
   ]
 };
