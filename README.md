@@ -1,20 +1,20 @@
-# webpack-study
+# 使用 DllPlugin
 
-本节安装了webpack-dev-server。
-webpack-dev-server 提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。
-也就是说修改文件可以自动刷新页面，极大提高开发效率。
-注意不是热替换HMR，会看到页面闪动，关于HMR见5.development分支
+### 认识 DLL
+
+在介绍 DllPlugin 前先给大家介绍下 DLL。 用过 Windows 系统的人应该会经常看到以 .dll 为后缀的文件，这些文件称为动态链接库，在一个动态链接库中可以包含给其他模块调用的函数和数据。
+
+要给 Web 项目构建接入动态链接库的思想，需要完成以下事情：
+
+* 把网页依赖的基础模块抽离出来，打包到一个个单独的动态链接库中去。一个动态链接库中可以包含多个模块。
+* 当需要导入的模块存在于某个动态链接库中时，这个模块不能被再次被打包，而是去动态链接库中获取。
+* 页面依赖的所有动态链接库需要被加载。
+
+为什么给 Web 项目构建接入动态链接库的思想后，会大大提升构建速度呢？ 原因在于包含大量复用模块的动态链接库只需要编译一次，在之后的构建过程中被动态链接库包含的模块将不会在重新编译(不用每次打包时从node_module中分析)，而是直接使用动态链接库中的代码。 由于动态链接库中大多数包含的是常用的第三方模块，例如 react、react-dom，只要不升级这些模块的版本，动态链接库就不用重新编译。
+
+### 使用 AutoDLLPlugin，必须先加载dll bundle再加载自己的bbundle，通常需要在html中额外的标script签，
+比如`<script src="dist/vendor.dll.js"></script>`
 
 
-具体步骤：
-在webpack配置文件中添加devServer配置项，
-然后在package.json中添加`"start": "webpack-dev-server --open"`
-执行`npm start`启动webpack-dev-server，默认会打开http://localhost:8080/
-修改print.js会重新编译并加载
 
-关于域名，端口等更多配置项见[dev-server](https://doc.webpack-china.org/configuration/dev-server)
-
-待研究：
-webpack-dev-middleware
-
-参考：https://webpack.js.org/guides/development/
+参考：https://github.com/asfktz/autodll-webpack-plugin
