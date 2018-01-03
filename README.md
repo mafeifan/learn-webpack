@@ -16,5 +16,5 @@
 比如`<script src="dist/vendor.dll.js"></script>`
 
 
-
+### 和CommonsChunkPlugin不太一样， 我合并了jquery和datatables，用CommonsChunkPlugin可以成功，换这样不能用
 参考：https://github.com/asfktz/autodll-webpack-plugin
